@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     width: wp("28%"),
     borderRadius: 8,
-    marginBottom: 20,
+    marginBottom: 80,
   },
   buttonEnabled: {
     backgroundColor: '#00297f',
