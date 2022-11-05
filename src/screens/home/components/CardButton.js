@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   buttonEnabled: {
-    backgroundColor: '#00297f',
+    backgroundColor: '#002055',
   },
   buttonDisabled: {
     backgroundColor: '#86cddf',

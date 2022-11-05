@@ -5,7 +5,7 @@ import firebase from "../../config/firebase";
 
 import logo from '../../assets/logo.png';
 import Home from '../home/Home';
-import Register from "../register/Register";
+import Register from "../user/newUser";
 
 
 export default function Login({ navigation }) {
@@ -68,7 +68,7 @@ export default function Login({ navigation }) {
                 </TouchableOpacity>
             }
             <Text style={styles.registration}>Não tem um cadastro?</Text>
-            <Text style={styles.linkRegister} onPress={() => navigation.navigate("Register")}>Registre-se</Text>
+            <Text style={styles.linkRegister} onPress={() => navigation.navigate("newUser")}>Registre-se</Text>
             <View style={{ height: 100 }}></View>
 
         </SafeAreaView>

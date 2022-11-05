@@ -5,7 +5,7 @@ import firebase from "../../config/firebase";
 
 import logo from '../../assets/logo.png';
 
-export default function Register({ navigation }) {
+export default function NewUser({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorRegister, setErrorRegister] = useState("");

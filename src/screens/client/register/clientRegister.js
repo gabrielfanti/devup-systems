@@ -26,8 +26,8 @@ export default function ClientRegister({ navigation }) {
                 placeholder={"Endereço:"}
                 type="text"
             />
-            <TouchableOpacity>
-                <Text style={styles.linkLogin} onPress={() => navigation.navigate("Home")}>Cadastrar</Text>
+            <TouchableOpacity style={styles.buttonRegister}>
+                <Text style={styles.buttonRegisterText} onPress={() => navigation.navigate("Home")}>Cadastrar</Text>
             </TouchableOpacity>
             <View style={{ height: 100 }}></View>
 
@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     title: {
-        fontSize: 30,
-        color: "#0000cd",
+        fontSize: 22,
+        color: "#102055",
         marginBottom: 15,
         fontWeight: "bold"
     },
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         padding: 10,
         height: 50,
         borderBottomWidth: 1,
-        borderBottomColor: "#0000cd",
+        borderBottomColor: "#102055",
         marginLeft: "auto",
         marginRight: "auto",
         color: "#4d5156",
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#0000cd",
+        backgroundColor: "#102055",
         borderRadius: 50,
         marginTop: 30,
     },
@@ -90,12 +90,8 @@ const styles = StyleSheet.create({
         color: "#F92E6A",
         fontSize: 16,
     },
-    login: {
-        marginTop: 20,
-        color: "#4d5156",
-    },
-    linkLogin: {
-        color: "#1877f2",
+    buttonRegisterText: {
+        color: "#ffffff",
         fontSize: 16,
     }
 });

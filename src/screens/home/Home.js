@@ -18,7 +18,6 @@ const Home = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <HeaderMenu />
       <Image style={styles.logo} resizeMode="contain" source={logo} />
-      <Text style={styles.boasVindas}>Bem vindo ao DevUp Systems PDV!</Text>
       <View pointerEvents={loading ? 'none' : 'auto'} style={styles.grid}>
         <CardButton
           title="Venda"
@@ -35,27 +34,38 @@ const Home = ({ navigation }) => {
         <CardButton
           title="Cadastrar clientes"
           icon={user}
-          onPress={() => navigation.navigate("ClientRegister")}
+          onPress={() =>
+            navigation.navigate("ClientRegister")}
         />
         <CardButton
           title="Cadastrar produtos"
           icon={user}
+          onPress={() =>
+            navigation.navigate("ProductRegister")}
         />
         <CardButton
           title="cadastro de fornecedores"
           icon={user}
+          onPress={() =>
+            navigation.navigate("SupplierRegister")}
         />
-                <CardButton
+        <CardButton
           title="Relatório clientes"
           icon={sale}
+          onPress={() =>
+            navigation.navigate("ClientReport")}
         />
-                <CardButton
+        <CardButton
           title="Relatório produtos"
           icon={sale}
+          onPress={() =>
+            navigation.navigate("ProductReport")}
         />
-                <CardButton
-          title="Relatório vendas"
+        <CardButton
+          title="Relatório de fornecedores"
           icon={sale}
+          onPress={() =>
+            navigation.navigate("SupplierReport")}
         />
       </View>
     </SafeAreaView>
