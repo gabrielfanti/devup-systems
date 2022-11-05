@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     elevation: 8,
     aspectRatio: 1,
-    width: wp("28%"),
+    width: '30%',
     borderRadius: 8,
-    marginBottom: 80,
+    marginBottom: 12,
   },
   buttonEnabled: {
     backgroundColor: '#00297f',
@@ -31,12 +31,12 @@ const styles = StyleSheet.create({
   buttonDisabled: {
     backgroundColor: '#86cddf',
   },
-  icon: {
-    width: wp(7.75),
-    height: hp(7.75),
-  },
   text: {
-    fontSize: wp("3%"),
+    fontSize: 12,
     color: '#ffffff',
+  },
+  icon: {
+    width: 32,
+    height: 32,
   },
 });
