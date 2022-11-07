@@ -1,11 +1,25 @@
 import React, { useState } from "react";
 import { View, Text, Image, TextInput, SafeAreaView, TouchableOpacity, StyleSheet } from "react-native";
 import { widthToDP as wp, heightToDP as hp } from "react-native-responsive-screens";
-import firebase from "../../../config/firebase";
+import database from "../../../config/firebase";
 
 import logo from '../../../assets/logo.png';
 
 export default function ClientRegister({ navigation }) {
+    const [nome, setNome] = useState("");
+    const [cpf, setCpf] = useState("");
+    const [endereco, setEndereco] = useState("");
+    const [cidade, setCidade] = useState("");
+
+    function addCliente() {
+        database.collection("Clientes").add({
+            Nome: nome,
+            CPF: cpf,
+            Endereco: endereco,
+            Cidade: cidade,
+            status: false,
+        })
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -14,20 +28,35 @@ export default function ClientRegister({ navigation }) {
             <TextInput
                 style={styles.input}
                 placeholder={"Nome:"}
+                onChangeText={setNome}
+                value={nome}
                 type="text"
             />
             <TextInput
                 style={styles.input}
                 placeholder={"CPF:"}
-                type="text"
+                onChangeText={setCpf}
+                value={cpf}
+                type="number"
             />
             <TextInput
                 style={styles.input}
                 placeholder={"Endereço:"}
+                onChangeText={setEndereco}
+                value={endereco}
                 type="text"
             />
-            <TouchableOpacity style={styles.buttonRegister}>
-                <Text style={styles.buttonRegisterText} onPress={() => navigation.navigate("Home")}>Cadastrar</Text>
+            <TextInput
+                style={styles.input}
+                placeholder={"Cidade:"}
+                onChangeText={setCidade}
+                value={cidade}
+                type="text"
+            />
+            <TouchableOpacity style={styles.buttonRegister}
+            onPress={() => { addCliente()
+            }}>
+                <Text style={styles.buttonRegisterText}>Cadastrar</Text>
             </TouchableOpacity>
             <View style={{ height: 100 }}></View>
 

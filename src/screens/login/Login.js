@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, Image, TextInput, TouchableOpacity, SafeAreaView, StyleSheet } from "react-native";
+import React, { useState, useEffect, useSelector } from "react";
+import { View, Text, Image, TextInput, TouchableOpacity, SafeAreaView, StyleSheet, Switch } from "react-native";
 import { widthToDP as wp, heightToDP as hp } from "react-native-responsive-screens";
-import firebase from "../../config/firebase";
+import authentication from "../../config/firebase";
 
 import logo from '../../assets/logo.png';
 import Home from '../home/Home';
@@ -14,7 +14,7 @@ export default function Login({ navigation }) {
     const [errorLogin, setErrorLogin] = useState("");
 
     const loginFirebase = () => {
-        firebase.auth().signInWithEmailAndPassword(email, password)
+        authentication.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 let user = userCredential.user;
                 navigation.navigate("Home", { idUser: user.uid });
@@ -68,7 +68,7 @@ export default function Login({ navigation }) {
                 </TouchableOpacity>
             }
             <Text style={styles.registration}>Não tem um cadastro?</Text>
-            <Text style={styles.linkRegister} onPress={() => navigation.navigate("newUser")}>Registre-se</Text>
+            <Text style={styles.linkRegister} onPress={() => navigation.navigate("NewUser")}>Registre-se</Text>
             <View style={{ height: 100 }}></View>
 
         </SafeAreaView>
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 30,
-        color: "#0000cd",
+        color: "#102055",
         marginBottom: 15,
         fontWeight: "bold"
     },
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         padding: 10,
         height: 50,
         borderBottomWidth: 1,
-        borderBottomColor: "#0000cd",
+        borderBottomColor: "#102055",
         marginLeft: "auto",
         marginRight: "auto",
         color: "#4d5156",
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#0000cd",
+        backgroundColor: "#102055",
         borderRadius: 50,
         marginTop: 30,
     },
