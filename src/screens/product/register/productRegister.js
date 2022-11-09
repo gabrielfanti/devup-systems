@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { View, Text, Image, TextInput, SafeAreaView, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, Image, Button, TextInput, SafeAreaView, TouchableOpacity, StyleSheet } from "react-native";
 import { widthToDP as wp, heightToDP as hp } from "react-native-responsive-screens";
-import database from "../../../config/firebase";
+import { database } from "../../../config/firebase";
+import { collection } from "firebase/firestore";
 
 import logo from '../../../assets/logo.png';
 
@@ -11,15 +12,14 @@ export default function ProductRegister({ navigation }) {
     const [codigo, setCodigo] = useState("");
     const [valor, setValor] = useState("");
 
-    function addProduto() {
-        database.collection("Produtos").add({
-            Nome: nome,
-            Marca: marca,
-            Codigo: codigo,
-            Valor: valor,
-            status: false,
-        })
-    }
+    const submit = () => {
+        database.collection("Fornecedores").add({
+          Nome: nome,
+          Marca: marca,
+          Codigo: codigo,
+          Valor: valor,
+        });
+      };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -44,7 +44,7 @@ export default function ProductRegister({ navigation }) {
                 placeholder={"Código de barras:"}
                 onChangeText={setCodigo}
                 value={codigo}
-                type="text"
+                type="number"
             />
             <TextInput
                 style={styles.input}
@@ -54,8 +54,7 @@ export default function ProductRegister({ navigation }) {
                 type="text"
             />
             <TouchableOpacity style={styles.buttonRegister}
-            onPress={() => { addProduto()
-            }}>
+            onPress={() => submit() }>
                 <Text style={styles.buttonRegisterText}>Cadastrar</Text>
             </TouchableOpacity>
             <View style={{ height: 100 }}></View>

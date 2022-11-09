@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, Image, TextInput, SafeAreaView, TouchableOpacity, StyleSheet } from "react-native";
 import { widthToDP as wp, heightToDP as hp } from "react-native-responsive-screens";
-import database from "../../../config/firebase";
+import { database } from "../../../config/firebase";
+import { collection } from "firebase/firestore"; 
 
 import logo from '../../../assets/logo.png';
 
@@ -11,15 +12,19 @@ export default function ClientRegister({ navigation }) {
     const [endereco, setEndereco] = useState("");
     const [cidade, setCidade] = useState("");
 
-    function addCliente() {
+    const submit = () => {
         database.collection("Clientes").add({
-            Nome: nome,
-            CPF: cpf,
-            Endereco: endereco,
-            Cidade: cidade,
-            status: false,
-        })
-    }
+          Nome: nome,
+          CPF: cpf,
+          Endereco: endereco,
+          Cidade: cidade,
+        });
+      
+        setNome("");
+        setCpf("");
+        setEndereco("");
+        setCidade("");
+      };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -54,8 +59,7 @@ export default function ClientRegister({ navigation }) {
                 type="text"
             />
             <TouchableOpacity style={styles.buttonRegister}
-            onPress={() => { addCliente()
-            }}>
+            onPress={() => submit() }>
                 <Text style={styles.buttonRegisterText}>Cadastrar</Text>
             </TouchableOpacity>
             <View style={{ height: 100 }}></View>

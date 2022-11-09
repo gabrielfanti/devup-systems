@@ -6,6 +6,7 @@ import firebase from "../../../config/firebase";
 import logo from '../../../assets/logo.png';
 
 export default function ClientReport({ navigation }) {
+    const database = firebase.firestore();
 
     return (
         <SafeAreaView style={styles.container}>

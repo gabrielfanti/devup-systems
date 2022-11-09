@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useSelector } from "react";
 import { View, Text, Image, TextInput, TouchableOpacity, SafeAreaView, StyleSheet, Switch } from "react-native";
 import { widthToDP as wp, heightToDP as hp } from "react-native-responsive-screens";
-import authentication from "../../config/firebase";
+import { authentication } from "../../config/firebase";
 
 import logo from '../../assets/logo.png';
 import Home from '../home/Home';
