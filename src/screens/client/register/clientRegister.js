@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, TextInput, SafeAreaView, TouchableOpacity, StyleSheet } from "react-native";
 import { widthToDP as wp, heightToDP as hp } from "react-native-responsive-screens";
-import { database } from "../../../config/firebase";
-import { collection } from "firebase/firestore"; 
-
 import logo from '../../../assets/logo.png';
 
 export default function ClientRegister({ navigation }) {
@@ -12,19 +9,6 @@ export default function ClientRegister({ navigation }) {
     const [endereco, setEndereco] = useState("");
     const [cidade, setCidade] = useState("");
 
-    const submit = () => {
-        database.collection("Clientes").add({
-          Nome: nome,
-          CPF: cpf,
-          Endereco: endereco,
-          Cidade: cidade,
-        });
-      
-        setNome("");
-        setCpf("");
-        setEndereco("");
-        setCidade("");
-      };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -33,33 +17,33 @@ export default function ClientRegister({ navigation }) {
             <TextInput
                 style={styles.input}
                 placeholder={"Nome:"}
-                onChangeText={setNome}
+                onChangeText={nome => setNome(nome)}
                 value={nome}
                 type="text"
             />
             <TextInput
                 style={styles.input}
                 placeholder={"CPF:"}
-                onChangeText={setCpf}
+                onChangeText={cpf => setCpf(cpf)}
                 value={cpf}
-                type="number"
+                type="text"
             />
             <TextInput
                 style={styles.input}
                 placeholder={"Endereço:"}
-                onChangeText={setEndereco}
+                onChangeText={endereco => setEndereco(endereco)}
                 value={endereco}
                 type="text"
             />
             <TextInput
                 style={styles.input}
                 placeholder={"Cidade:"}
-                onChangeText={setCidade}
+                onChangeText={cidade => setCidade(cidade)}
                 value={cidade}
                 type="text"
             />
             <TouchableOpacity style={styles.buttonRegister}
-            onPress={() => submit() }>
+                onPress={() => submit()}>
                 <Text style={styles.buttonRegisterText}>Cadastrar</Text>
             </TouchableOpacity>
             <View style={{ height: 100 }}></View>
@@ -127,4 +111,4 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         fontSize: 16,
     }
-});
+})

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Image, TextInput, SafeAreaView, TouchableOpacity, StyleSheet } from "react-native";
 import { widthToDP as wp, heightToDP as hp } from "react-native-responsive-screens";
-import { database } from "../../../config/firebase";
 
 import logo from '../../../assets/logo.png';
 
@@ -10,15 +9,6 @@ export default function SupplierRegister({ navigation }) {
     const [cnpj, setCnpj] = useState("");
     const [representante, setRepresentante] = useState("");
     const [contato, setContato] = useState("");
-
-    const submit = () => {
-        database.collection("Fornecedores").add({
-          Empresa: empresa,
-          CNPJ: cnpj,
-          Representante: representante,
-          Contato: contato,
-        });
-      };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -52,8 +42,7 @@ export default function SupplierRegister({ navigation }) {
                 value={contato}
                 type="text"
             />
-            <TouchableOpacity style={styles.buttonRegister}
-            onPress={() => submit() }>
+            <TouchableOpacity style={styles.buttonRegister}>
                 <Text style={styles.buttonRegisterText}>Cadastrar</Text>
             </TouchableOpacity>
             <View style={{ height: 100 }}></View>
