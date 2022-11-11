@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Image, TextInput, SafeAreaView, TouchableOpacity, StyleSheet } from "react-native";
 import { widthToDP as wp, heightToDP as hp } from "react-native-responsive-screens";
-import { authentication } from "../../config/firebase";
+import firebase from "../../database/firebase";
 
 import logo from '../../assets/logo.png';
 
@@ -11,7 +11,7 @@ export default function NewUser({ navigation }) {
     const [errorRegister, setErrorRegister] = useState("");
 
     const registerFirebase = () => {
-        authentication.auth().createUserWithEmailAndPassword(email, password)
+        firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
                 let user = userCredential.user;

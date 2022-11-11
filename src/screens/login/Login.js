@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useSelector } from "react";
 import { View, Text, Image, TextInput, TouchableOpacity, SafeAreaView, StyleSheet, Switch } from "react-native";
 import { widthToDP as wp, heightToDP as hp } from "react-native-responsive-screens";
-import { authentication } from "../../config/firebase";
+import firebase from "../../database/firebase";
 
 import logo from '../../assets/logo.png';
-import Home from '../home/Home';
-import Register from "../user/newUser";
-
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState("");
@@ -14,7 +11,7 @@ export default function Login({ navigation }) {
     const [errorLogin, setErrorLogin] = useState("");
 
     const loginFirebase = () => {
-        authentication.auth().signInWithEmailAndPassword(email, password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 let user = userCredential.user;
                 navigation.navigate("Home", { idUser: user.uid });

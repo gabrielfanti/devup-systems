@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Image, Button, TextInput, SafeAreaView, TouchableOpacity, StyleSheet } from "react-native";
 import { widthToDP as wp, heightToDP as hp } from "react-native-responsive-screens";
-import { database } from "../../../config/firebase";
-import { collection } from "firebase/firestore";
 
 import logo from '../../../assets/logo.png';
 
@@ -11,15 +9,6 @@ export default function ProductRegister({ navigation }) {
     const [marca, setMarca] = useState("");
     const [codigo, setCodigo] = useState("");
     const [valor, setValor] = useState("");
-
-    const submit = () => {
-        database.collection("Fornecedores").add({
-          Nome: nome,
-          Marca: marca,
-          Codigo: codigo,
-          Valor: valor,
-        });
-      };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -53,8 +42,7 @@ export default function ProductRegister({ navigation }) {
                 value={valor}
                 type="text"
             />
-            <TouchableOpacity style={styles.buttonRegister}
-            onPress={() => submit() }>
+            <TouchableOpacity style={styles.buttonRegister}>
                 <Text style={styles.buttonRegisterText}>Cadastrar</Text>
             </TouchableOpacity>
             <View style={{ height: 100 }}></View>

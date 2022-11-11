@@ -4,7 +4,7 @@ import 'firebase/compat/storage';
 import 'firebase/compat/auth';
 
 
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyDAajDH_EPhQxhrAbdGZww7QmbgK7B2gGc",
   authDomain: "devupsystems.firebaseapp.com",
   databaseURL: "https://devupsystems-default-rtdb.firebaseio.com",
@@ -19,4 +19,4 @@ firebase.initializeApp(firebaseConfig);
 const authentication = firebase.auth();
 const database = firebase.firestore();
 
-export { authentication, database };
+export default firebase;

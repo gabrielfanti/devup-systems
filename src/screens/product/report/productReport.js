@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Image, TextInput, SafeAreaView, TouchableOpacity, StyleSheet } from "react-native";
 import { widthToDP as wp, heightToDP as hp } from "react-native-responsive-screens";
-import firebase from "../../../config/firebase";
 
 import logo from '../../../assets/logo.png';
 
