@@ -42,8 +42,7 @@ export default function ClientRegister({ navigation }) {
                 value={cidade}
                 type="text"
             />
-            <TouchableOpacity style={styles.buttonRegister}
-                onPress={() => submit()}>
+            <TouchableOpacity style={styles.buttonRegister}>
                 <Text style={styles.buttonRegisterText}>Cadastrar</Text>
             </TouchableOpacity>
             <View style={{ height: 100 }}></View>
