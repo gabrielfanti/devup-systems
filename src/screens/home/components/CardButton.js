@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, Image, StyleSheet, Dimensions } from 'react-native';
 import TouchableScale from 'react-native-touchable-scale';
-import { widthToDP as wp, heightToDP as hp } from "react-native-responsive-screens";
 
 const CardButton = ({ title, icon, onPress, disabled }) => {
   return (
@@ -29,7 +28,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#002055',
   },
   buttonDisabled: {
-    backgroundColor: '#86cddf',
+    backgroundColor: '#808080',
   },
   text: {
     fontSize: 12,

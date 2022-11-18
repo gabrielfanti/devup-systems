@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Image, View, Text, SafeAreaView, StyleSheet } from "react-native";
-import { widthToDP as wp, heightToDP as hp } from "react-native-responsive-screens";
 import CardButton from "./components/CardButton";
 import HeaderMenu from "./components/HeaderMenu";
 
@@ -27,45 +26,23 @@ const Home = ({ navigation }) => {
           title="Consulta venda"
           icon={cart}
         />
-        <CardButton
+        <CardButton disabled={true}
           title="Consulta preços"
           icon={cart}
         />
         <CardButton
-          title="Cadastrar clientes"
+          title="Clientes"
           icon={user}
           onPress={() =>
-            navigation.navigate("ClientRegister")}
+            navigation.navigate("Clientes")}
         />
         <CardButton
-          title="Cadastrar produtos"
+          title="Produtos"
           icon={user}
-          onPress={() =>
-            navigation.navigate("ProductRegister")}
         />
         <CardButton
-          title="cadastro de fornecedores"
+          title="Fornecedores"
           icon={user}
-          onPress={() =>
-            navigation.navigate("SupplierRegister")}
-        />
-        <CardButton
-          title="Relatório clientes"
-          icon={sale}
-          onPress={() =>
-            navigation.navigate("ClientReport")}
-        />
-        <CardButton
-          title="Relatório produtos"
-          icon={sale}
-          onPress={() =>
-            navigation.navigate("ProductReport")}
-        />
-        <CardButton
-          title="Relatório de fornecedores"
-          icon={sale}
-          onPress={() =>
-            navigation.navigate("SupplierReport")}
         />
       </View>
     </SafeAreaView>
@@ -80,14 +57,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   logo: {
-    width: wp("45%"),
-    height: hp("20%"),
-    marginTop: hp("1%"),
+    width: 150,
+    height: 150,
+    marginTop: 5,
     alignSelf: 'center',
   },
   boasVindas: {
     fontWeight: 'bold',
-    fontSize: wp("4.00%"),
+    fontSize: 16,
     alignSelf: 'center',
   },
   grid: {
@@ -98,7 +75,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 40,
     paddingHorizontal: 10,
-    marginTop: hp("20%"),
+    marginTop: '20%',
     justifyContent: 'space-evenly',
   },
 })

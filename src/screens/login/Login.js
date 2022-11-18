@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useSelector } from "react";
 import { View, Text, Image, TextInput, TouchableOpacity, SafeAreaView, StyleSheet, Switch } from "react-native";
-import { widthToDP as wp, heightToDP as hp } from "react-native-responsive-screens";
 import firebase from "../../database/firebase";
 
 import logo from '../../assets/logo.png';
@@ -80,9 +79,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     logo: {
-        width: wp("45%"),
-        height: hp("20%"),
-        marginTop: hp("1%"),
+        width: 150,
+        height: 150,
+        marginTop: 5,
         alignSelf: 'center',
     },
     title: {
