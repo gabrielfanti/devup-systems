@@ -14,9 +14,10 @@ export function ClientDetail({item, setClienteSelecionado}) {
 
 const styles = StyleSheet.create({
   cartao: {
-    borderRadius: 8,
+    borderColor: "#5050ff",
+    borderRadius: 4,
     backgroundColor: "#ffffff",
-    paddingVertical: 8,
+    paddingVertical: 6,
     paddingHorizontal: 16,
     marginHorizontal: 16,
     marginBottom: 8,
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
-    elevation: 4,
+    elevation: 2,
   },
   titulo: {
     fontSize: 24,

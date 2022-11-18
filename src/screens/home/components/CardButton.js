@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   buttonEnabled: {
-    backgroundColor: '#002055',
+    backgroundColor: "#5050ff",
   },
   buttonDisabled: {
-    backgroundColor: '#808080',
+    backgroundColor: '#999999',
   },
   text: {
     fontSize: 12,

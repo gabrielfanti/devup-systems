@@ -74,7 +74,7 @@ export default function ClientEdit({ mostraClientes, clienteSelecionado, setClie
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={estilos.modal}>
               <Text style={estilos.modalTitulo}>Cadastrar cliente</Text>
-              <Text style={estilos.modalSubTitulo}>Dados do cliente</Text>
+              <Text style={estilos.modalSubTitulo}>Dados do cliente:</Text>
               <TextInput
                 style={estilos.modalInput}
                 multiline={true}
@@ -129,7 +129,7 @@ const estilos = StyleSheet.create({
     alignItems: "flex-end"
   },
   modal: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#ffffff",
     paddingHorizontal: 16,
     paddingTop: 16,
     paddingBottom: 32,
@@ -147,28 +147,28 @@ const estilos = StyleSheet.create({
     elevation: 10,
   },
   modalTitulo: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: "600",
     marginBottom: 18,
   },
-  modalInput: {
+  modalSubTitulo: {
     fontSize: 18,
+    marginBottom: 8,
+    fontWeight: "600"
+  },
+  modalInput: {
+    fontSize: 16,
     marginBottom: 12,
     paddingHorizontal: 4,
     borderBottomWidth: 1,
-    borderBottomColor: "#FF9A94",
-  },
-  modalSubTitulo: {
-    fontSize: 14,
-    marginBottom: 8,
-    fontWeight: "600"
+    borderBottomColor: "#5050ff",
   },
   modalBotoes: {
     flexDirection: "row",
     justifyContent: "space-between"
   },
   modalBotaoSalvar: {
-    backgroundColor: "#2ea805",
+    backgroundColor: "#5050ff",
     borderRadius: 5,
     padding: 8,
     width: 80,
@@ -182,17 +182,17 @@ const estilos = StyleSheet.create({
     alignItems: "center",
   },
   modalBotaoCancelar: {
-    backgroundColor: "#057fa8",
+    backgroundColor: "#5050ff",
     borderRadius: 5,
     padding: 8,
     width: 80,
     alignItems: "center",
   },
   modalBotaoTexto: {
-    color: "#FFFFFF",
+    color: "#ffffff",
   },
   addButton: {
-    backgroundColor: "#54ba32",
+    backgroundColor: "#5050ff",
     justifyContent: "center",
     height: 64,
     width: 64,
