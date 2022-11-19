@@ -5,7 +5,7 @@ export function ClientDetail({ item, setClienteSelecionado }) {
 
   return (
     <TouchableOpacity style={styles.cartao} onPress={() => setClienteSelecionado(item)}>
-      <Text style={styles.texto}>Nome: <b>{item.nome}</b></Text>
+      <Text style={styles.texto}>Nome: {item.nome}</Text>
       <Text style={styles.texto}>CPF: {item.cpf}</Text>
       <Text style={styles.texto}>Contato: {item.contato}</Text>
     </TouchableOpacity>

@@ -7,7 +7,7 @@ export function ProductDetail({ item, setProdutoSelecionado }) {
     <TouchableOpacity style={styles.cartao} onPress={() => setProdutoSelecionado(item)}>
       <Text style={styles.texto}>Nome: {item.nome}</Text>
       <Text style={styles.texto}>Marca: {item.marca}</Text>
-      <Text style={styles.texto}>Valor: <b>{item.valor}</b></Text>
+      <Text style={styles.texto}>Valor: {item.valor}</Text>
     </TouchableOpacity>
   )
 }

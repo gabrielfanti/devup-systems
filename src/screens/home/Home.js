@@ -39,10 +39,14 @@ const Home = ({ navigation }) => {
         <CardButton
           title="Produtos"
           icon={user}
+          onPress={() =>
+            navigation.navigate("Produtos")}
         />
         <CardButton
           title="Fornecedores"
           icon={user}
+          onPress={() =>
+            navigation.navigate("Fornecedores")}
         />
       </View>
     </SafeAreaView>

@@ -95,7 +95,7 @@ export default function ProductEdit({ mostraProdutos, produtoSelecionado, setPro
                 numberOfLines={2}
                 onChangeText={novoValor => setValor(novoValor)}
                 placeholder="Digite aqui o valor:"
-                value={contato} />
+                value={valor} />
               <View style={estilos.modalBotoes}>
                 <TouchableOpacity style={estilos.modalBotaoSalvar} onPress={() => {
                   produtoParaAtualizar ? modificaProduto() : salvaProduto()
