@@ -2,7 +2,7 @@ import React, { useState, useEffect, useSelector } from "react";
 import { View, Text, Image, TextInput, TouchableOpacity, SafeAreaView, StyleSheet, Switch } from "react-native";
 import firebase from "../../database/firebase";
 
-import logo from '../../assets/logo.png';
+import logo from '../../../assets/logo.png';
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState("");
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 30,
-        color: "#102055",
+        color: "#5050ff",
         marginBottom: 15,
         fontWeight: "bold"
     },
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         padding: 10,
         height: 50,
         borderBottomWidth: 1,
-        borderBottomColor: "#102055",
+        borderBottomColor: "#5050ff",
         marginLeft: "auto",
         marginRight: "auto",
         color: "#4d5156",
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#102055",
+        backgroundColor: "#5050ff",
         borderRadius: 50,
         marginTop: 30,
     },

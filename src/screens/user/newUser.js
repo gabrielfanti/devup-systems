@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, Image, TextInput, SafeAreaView, TouchableOpacity, StyleSheet } from "react-native";
 import firebase from "../../database/firebase";
 
-import logo from '../../assets/logo.png';
+import logo from '../../../assets/logo.png';
 
 export default function NewUser({ navigation }) {
     const [email, setEmail] = useState("");
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 30,
-        color: "#102055",
+        color: "#5050ff",
         marginBottom: 15,
         fontWeight: "bold"
     },
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#102055",
+        backgroundColor: "#5050ff",
         borderRadius: 50,
         marginTop: 30,
     },

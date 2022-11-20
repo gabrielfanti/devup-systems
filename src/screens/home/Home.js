@@ -3,11 +3,11 @@ import { Image, View, Text, SafeAreaView, StyleSheet } from "react-native";
 import CardButton from "./components/CardButton";
 import HeaderMenu from "./components/HeaderMenu";
 
-import logo from "../../assets/logo.png";
-import sale from '../../assets/sale.png';
-import user from '../../assets/user.png';
-import cart from '../../assets/cart.png';
-import price from '../../assets/price.png'
+import logo from "../../../assets/logo.png";
+import sale from '../../../assets/sale.png';
+import user from '../../../assets/user.png';
+import cart from '../../../assets/cart.png';
+import price from '../../../assets/price.png'
 
 
 const Home = ({ navigation }) => {
@@ -24,11 +24,11 @@ const Home = ({ navigation }) => {
         />
         <CardButton
           title="Consulta venda"
-          icon={cart}
+          icon={sale}
         />
         <CardButton disabled={true}
           title="Consulta preços"
-          icon={cart}
+          icon={price}
         />
         <CardButton
           title="Clientes"
@@ -39,10 +39,14 @@ const Home = ({ navigation }) => {
         <CardButton
           title="Produtos"
           icon={user}
+          onPress={() =>
+            navigation.navigate("Produtos")}
         />
         <CardButton
           title="Fornecedores"
           icon={user}
+          onPress={() =>
+            navigation.navigate("Fornecedores")}
         />
       </View>
     </SafeAreaView>

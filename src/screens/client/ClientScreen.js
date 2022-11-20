@@ -39,4 +39,3 @@ const estilos = StyleSheet.create({
     justifyContent: "flex-start",
   },
 })
-

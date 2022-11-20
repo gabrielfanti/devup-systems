@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-export function ClientDetail({ item, setClienteSelecionado }) {
+export function SupplierDetail({ item, setFornecedorSelecionado }) {
 
   return (
-    <TouchableOpacity style={styles.cartao} onPress={() => setClienteSelecionado(item)}>
+    <TouchableOpacity style={styles.cartao} onPress={() => setFornecedorSelecionado(item)}>
       <Text style={styles.texto}>Nome: {item.nome}</Text>
-      <Text style={styles.texto}>CPF: {item.cpf}</Text>
+      <Text style={styles.texto}>CNPJ: {item.cnpj}</Text>
       <Text style={styles.texto}>Contato: {item.contato}</Text>
     </TouchableOpacity>
   )

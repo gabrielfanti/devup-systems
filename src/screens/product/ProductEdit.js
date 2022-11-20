@@ -1,64 +1,64 @@
 import React, { useEffect, useState } from "react";
 import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
-import { adicionaCliente, atualizaCliente, removeCliente } from "../../database/services/clientAPI";
+import { adicionaProduto, atualizaProduto, removeProduto } from "../../database/services/productAPI";
 
-export default function ClientEdit({ mostraClientes, clienteSelecionado, setClienteSelecionado }) {
+export default function ProductEdit({ mostraProdutos, produtoSelecionado, setProdutoSelecionado }) {
   useEffect(() => {
-    if (clienteSelecionado.id) {
+    if (produtoSelecionado.id) {
       preencheModal()
-      setClienteParaAtualizar(true)
+      setProdutoParaAtualizar(true)
       setModalVisivel(true)
       return
     }
-    setClienteParaAtualizar(false)
-  }, [clienteSelecionado])
+    setProdutoParaAtualizar(false)
+  }, [produtoSelecionado])
 
   const [nome, setNome] = useState("")
-  const [cpf, setCpf] = useState("")
-  const [contato, setContato] = useState("")
+  const [marca, setMarca] = useState("")
+  const [valor, setValor] = useState("")
   const [modalVisivel, setModalVisivel] = useState(false)
-  const [clienteParaAtualizar, setClienteParaAtualizar] = useState(false)
+  const [produtoParaAtualizar, setProdutoParaAtualizar] = useState(false)
 
-  async function salvaCliente() {
-    const novoCliente = {
+  async function salvaProduto() {
+    const novoProduto = {
       nome: nome,
-      cpf: cpf,
-      contato: contato,
+      marca: marca,
+      valor: valor,
     }
-    await adicionaCliente(novoCliente)
-    mostraClientes()
+    await adicionaProduto(novoProduto)
+    mostraProdutos()
     limpaModal()
   }
 
-  async function modificaCliente() {
-    const novoCliente = {
+  async function modificaProduto() {
+    const novoProduto = {
       nome: nome,
-      cpf: cpf,
-      contato: contato,
-      id: clienteSelecionado.id
+      marca: marca,
+      valor: valor,
+      id: produtoSelecionado.id
     }
-    await atualizaCliente(novoCliente)
-    mostraClientes()
+    await atualizaProduto(novoProduto)
+    mostraProdutos()
     limpaModal()
   }
 
-  async function deletaCliente() {
-    await removeCliente(clienteSelecionado)
-    mostraClientes()
+  async function deletaProduto() {
+    await removeProduto(produtoSelecionado)
+    mostraProdutos()
     limpaModal()
   }
 
   function preencheModal() {
-    setNome(clienteSelecionado.nome)
-    setCpf(clienteSelecionado.cpf)
-    setContato(clienteSelecionado.contato)
+    setNome(produtoSelecionado.nome)
+    setMarca(produtoSelecionado.marca)
+    setValor(produtoSelecionado.valor)
   }
 
   function limpaModal() {
     setNome("")
-    setCpf("")
-    setContato("")
-    setClienteSelecionado({})
+    setMarca("")
+    setValor("")
+    setProdutoSelecionado({})
     setModalVisivel(false)
   }
 
@@ -73,8 +73,8 @@ export default function ClientEdit({ mostraClientes, clienteSelecionado, setClie
         <View style={estilos.centralizaModal}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={estilos.modal}>
-              <Text style={estilos.modalTitulo}>Cadastrar cliente</Text>
-              <Text style={estilos.modalSubTitulo}>Dados do cliente:</Text>
+              <Text style={estilos.modalTitulo}>Cadastrar produto</Text>
+              <Text style={estilos.modalSubTitulo}>Dados do produto:</Text>
               <TextInput
                 style={estilos.modalInput}
                 multiline={true}
@@ -86,24 +86,24 @@ export default function ClientEdit({ mostraClientes, clienteSelecionado, setClie
                 style={estilos.modalInput}
                 multiline={true}
                 numberOfLines={2}
-                onChangeText={novoCpf => setCpf(novoCpf)}
-                placeholder="Digite aqui o CPF:"
-                value={cpf} />
+                onChangeText={novaMarca => setMarca(novaMarca)}
+                placeholder="Digite aqui a marca:"
+                value={marca} />
               <TextInput
                 style={estilos.modalInput}
                 multiline={true}
                 numberOfLines={2}
-                onChangeText={novoContato => setContato(novoContato)}
-                placeholder="Digite aqui o contato:"
-                value={contato} />
+                onChangeText={novoValor => setValor(novoValor)}
+                placeholder="Digite aqui o valor:"
+                value={valor} />
               <View style={estilos.modalBotoes}>
                 <TouchableOpacity style={estilos.modalBotaoSalvar} onPress={() => {
-                  clienteParaAtualizar ? modificaCliente() : salvaCliente()
+                  produtoParaAtualizar ? modificaProduto() : salvaProduto()
                 }}>
                   <Text style={estilos.modalBotaoTexto}>Salvar</Text>
                 </TouchableOpacity>
-                {clienteParaAtualizar ?
-                  <TouchableOpacity style={estilos.modalBotaoDeletar} onPress={() => { deletaCliente() }}>
+                {produtoParaAtualizar ?
+                  <TouchableOpacity style={estilos.modalBotaoDeletar} onPress={() => { deletaProduto() }}>
                     <Text style={estilos.modalBotaoTexto}>Deletar</Text>
                   </TouchableOpacity> : <></>
                 }
