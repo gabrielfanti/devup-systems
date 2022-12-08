@@ -21,6 +21,8 @@ const Home = ({ navigation }) => {
         <CardButton
           title="Venda"
           icon={cart}
+          onPress={() =>
+            navigation.navigate("Venda")}
         />
         <CardButton
           title="Consulta venda"
