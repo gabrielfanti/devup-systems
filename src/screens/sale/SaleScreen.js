@@ -1,95 +1,60 @@
-import { View, FlatList, SafeAreaView, StatusBar, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { Text, View, FlatList, SafeAreaView, StatusBar, TouchableOpacity, StyleSheet } from "react-native";
+import { SaleDetail } from "./SaleDetail";
 import { useEffect, useState } from "react";
-import { ClientDetail } from "./ClientDetail";
-import { buscaCliente } from "../../database/services/clientAPI";
+import { criaTabela, buscaProduto } from "../../database/services/productAPI";
 
 export default function SaleScreen() {
 
-    useEffect(() => {
-        mostraClientes()
-    }, [])
+  useEffect(() => {
+    criaTabela()
+    mostraProdutos()
+  }, [])
 
-    const [clientes, setClientes] = useState([])
+  const [produtos, setProdutos] = useState([])
+  const [produtoSelecionado, setProdutoSelecionado] = useState({})
 
-    async function mostraClientes() {
-        const todosClientes = await buscaCliente()
-        setClientes(todosClientes)
-        console.log(todosClientes)
-    }
+  async function mostraProdutos() {
+    const todosProdutos = await buscaProduto()
+    setProdutos(todosProdutos)
+    console.log(todosProdutos)
+  }
 
-    const selectClient = () => {
-        return (
-            <SafeAreaView style={estilos.container}>
-                <FlatList
-                    data={clientes}
-                    renderItem={(cliente) => <ClientDetail {...cliente} />}
-                    keyExtractor={cliente => cliente.id} />
-                <StatusBar />
-            </SafeAreaView>
-        )
-    };
-
-    const newSale = () => {
-        return true;
-    };
-
-    return (
-        <View style={estilos.container}>
-            <View>
-                <TouchableOpacity onPress={() => { selectClient() }} style={estilos.selectClient}>
-                    <Text style={estilos.selectClientText}>Selecionar cliente</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={estilos.addButtonContainer}>
-                <TouchableOpacity onPress={() => { newSale() }} style={estilos.addButton}>
-                    <Text style={estilos.addButtonText}>+</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
+  return (
+    <SafeAreaView style={estilos.container}>
+      <TouchableOpacity style={estilos.botaoCliente}>
+        <Text style={estilos.botaoClienteTexto}>Cliente Geral</Text>
+      </TouchableOpacity>
+      <View>
+        <Text style={estilos.cartaoTexto}>Selecione um produto:</Text>
+      </View>
+      <FlatList
+        data={produtos}
+        renderItem={(produto) => <SaleDetail {...produto} setProdutoSelecionado={setProdutoSelecionado} />}
+        keyExtractor={produto => produto.id} />
+      <StatusBar />
+    </SafeAreaView>
+  )
 }
 
 const estilos = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "stretch",
-        justifyContent: "flex-start",
-    },
-    selectClient: {
-        backgroundColor: "#5050ff",
-        padding: 12,
-        width: '100%',
-        alignItems: "center",
-    },
-    selectClientText: {
-        color: "#FFFFFF",
-    },
-    addButton: {
-        backgroundColor: "#5050ff",
-        justifyContent: "center",
-        height: 64,
-        width: 64,
-        margin: 16,
-        alignItems: "center",
-        borderRadius: 9999,
-        position: "absolute",
-        bottom: 0,
-        right: 0,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-        elevation: 4,
-    },
-    addButtonText: {
-        fontSize: 32,
-        lineHeight: 40,
-        color: "#FFFFFF",
-    },
-    addButtonContainer: {
-        marginTop: 550
-    }
+  container: {
+    flex: 1,
+    alignItems: "stretch",
+    justifyContent: "flex-start",
+  },
+  botaoCliente: {
+    padding: 12,
+    borderWidth: 1,
+    alignItems: "center",
+    backgroundColor: '#999999',
+  },
+  botaoClienteTexto: {
+    fontSize: 20,
+  },
+  cartaoTexto: {
+    fontSize: 22,
+    textAlign: "center",
+    paddingTop: 12,
+    paddingBottom: 50
+  },
 })
