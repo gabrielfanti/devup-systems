@@ -98,7 +98,7 @@ export default function ProductEdit({ mostraProdutos, produtoSelecionado, setPro
                 value={valor} />
               <View style={estilos.modalBotoes}>
                 <TouchableOpacity style={estilos.modalBotaoSalvar} onPress={() => {
-                  produtoParaAtualizar ? modificaProduto() : modificaProduto()
+                  produtoParaAtualizar ? modificaProduto() : salvaProduto()
                 }}>
                   <Text style={estilos.modalBotaoTexto}>Salvar</Text>
                 </TouchableOpacity>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, SafeAreaView, Text, Alert, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 import { SaleDetail } from "./SaleDetail";
+import { ValueDetail } from "./ValueDetail";
 import { criaTabela, buscaProduto } from "../../database/services/productAPI";
 import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
@@ -40,6 +41,15 @@ export default function ReceivementScreen( { item }) {
             }
         );
 
+        const valorProduto= () => {
+            return(
+                <FlatList
+                data={produtos}
+                renderItem={(produto) => <SaleDetail {...produto} setProdutoSelecionado={setProdutoSelecionado} />}
+                keyExtractor={produto => produto.valor} />
+            )
+        }
+
     return (
         <SafeAreaView>
             <View style={styles.container}>
@@ -63,13 +73,11 @@ export default function ReceivementScreen( { item }) {
                     </Picker>
                 </View>
                 <Text style={{ textAlign: "center", marginTop: 80 }}>Informe o valor:</Text>
-                <View style={styles.container}>
-                    <TextInput style={styles.textInput}
-                        editable={false}
-                        secureTextEntry={false}
-                        placeholder="R$ 3.75"
-                        type="text"
-                    />
+                <View style={styles.containerValor}>
+                <FlatList
+                data={produtos}
+                renderItem={(produto) => <ValueDetail {...produto} setProdutoSelecionado={setProdutoSelecionado} />}
+                keyExtractor={produto => produto.id} />
                 </View>
                 <TouchableOpacity style={styles.buttonDisabled}>
                     <Text style={{ textAlign: "center", color: "#ffffff" }}>Adicionar</Text>
@@ -89,6 +97,17 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 20,
     },
+    containerValor: {
+        alignItems: "center",
+        padding: 6,
+        marginHorizontal: 170,
+        marginTop: 5,
+        marginBottom: 20,
+        borderWidth: 2,
+        borderRadius: 4,
+        borderColor: "#5050ff",
+        backgroundColor: "#f0f0f0",
+    },
     titulo: {
         fontSize: 20,
     },
@@ -99,6 +118,7 @@ const styles = StyleSheet.create({
     textInput: {
         borderWidth: 2,
         borderRadius: 4,
+        padding: 2,
         borderColor: "#5050ff",
         backgroundColor: "#f0f0f0",
         paddingHorizontal: 40,
@@ -121,7 +141,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#999999',
     },
     spacer: {
-        marginTop: 25,
+        marginTop: 15,
         paddingHorizontal: 110,
     }
 })
