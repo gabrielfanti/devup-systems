@@ -31,9 +31,11 @@ const Home = ({ navigation }) => {
           title="Consulta venda"
           icon={sale}
         />
-        <CardButton disabled={true}
-          title="Consulta preços"
-          icon={price}
+        <CardButton
+          title="Requisições"
+          icon={truck}
+          onPress={() =>
+            navigation.navigate("Requisições")}
         />
         <CardButton
           title="Clientes"
