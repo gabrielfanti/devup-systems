@@ -1,33 +1,35 @@
 import React, { useEffect, useState } from "react";
-import {
-    FlatList,
-    SafeAreaView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-} from "react-native";
+import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import * as MailComposer from "expo-mail-composer";
-import { criaTabela, buscaFornecedor } from "../../database/services/supplierAPI";
+import { Picker } from "@react-native-picker/picker";
+import { buscaFornecedor } from "../../database/services/supplierAPI";
+import { buscaProduto } from "../../database/services/productAPI";
 
-export default function SupplierScreen() {
+export default function EmailScreen() {
     const [fornecedores, setFornecedores] = useState([]);
     const [fornecedorSelecionado, setFornecedorSelecionado] = useState({});
-    const [assunto, setAssunto] = useState("");
-    const [mensagem, setMensagem] = useState("");
+    const [assunto, setAssunto] = useState("Requisição de produtos");
+    const [produto, setProduto] = useState(null);
+    const [quantidade, setQuantidade] = useState("01");
     const [modalVisivel, setModalVisivel] = useState(false);
+    const [produtos, setProdutos] = useState([]);
+    const [produtoSelecionado, setProdutoSelecionado] = useState({});
 
     useEffect(() => {
-        criaTabela();
         mostraFornecedores();
+        mostraProdutos();
     }, []);
 
     async function mostraFornecedores() {
         const todosFornecedores = await buscaFornecedor();
         setFornecedores(todosFornecedores);
         console.log(todosFornecedores);
+    }
+
+    async function mostraProdutos() {
+        const todosProdutos = await buscaProduto();
+        setProdutos(todosProdutos);
+        console.log(todosProdutos);
     }
 
     function SupplierDetail({ item }) {
@@ -46,15 +48,26 @@ export default function SupplierScreen() {
         );
     }
 
+    function ProductDetail({ item }) {
+        return (
+            <TouchableOpacity style={estilos.cartao} onPress={() => setProdutoSelecionado(item)}>
+                <Text style={estilos.texto}>Nome: {item.nome}</Text>
+                <Text style={estilos.texto}>Marca: {item.marca}</Text>
+                <Text style={estilos.texto}>Valor: {item.valor}</Text>
+            </TouchableOpacity>
+        );
+    }
+
     function enviaEmail() {
         MailComposer.composeAsync({
             recipients: [fornecedorSelecionado.contato],
             subject: assunto,
-            body: mensagem,
+            body: `Olá, Meu estabelecimento comercial gostaria de fazer a solicitação do Produto: ${produto} na Quantidade de: ${quantidade} itens. Para serem entregues no endereço...`,
         });
         setModalVisivel(false);
         setAssunto("");
-        setMensagem("");
+        setProduto("");
+        setQuantidade("");
     }
 
     return (
@@ -71,14 +84,29 @@ export default function SupplierScreen() {
                     <TextInput
                         style={estilos.inputModal}
                         placeholder="Assunto"
+                        value={assunto}
                         onChangeText={(texto) => setAssunto(texto)}
                     />
-                    <TextInput
-                        style={[estilos.inputModal, { height: 200 }]}
-                        multiline={true}
-                        placeholder="Mensagem"
-                        onChangeText={(texto) => setMensagem(texto)}
-                    />
+                    <Picker
+                        selectedValue={produto}
+                        style={estilos.inputModal}
+                        onValueChange={(itemValue) => setProduto(itemValue)}
+                    >
+                        <Picker.Item label="Selecione:" value="" />
+                        {produtos.map((produto) => (
+                            <Picker.Item label={produto.nome} value={produto.nome} key={produto.id} />
+                        ))}
+                    </Picker>
+                    <View style={{ flexDirection: "row" }}>
+                        <View style={{ flex: 1 }}>
+                            <TextInput
+                                style={estilos.inputModal}
+                                placeholder="Quantidade"
+                                value={quantidade}
+                                onChangeText={(texto) => setQuantidade(texto)}
+                            />
+                        </View>
+                    </View>
                     <TouchableOpacity style={estilos.botaoModal} onPress={enviaEmail}>
                         <Text style={estilos.textoBotaoModal}>Enviar</Text>
                     </TouchableOpacity>
