@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Image, View, Text, SafeAreaView, StyleSheet } from "react-native";
 import CardButton from "./components/CardButton";
-import HeaderMenu from "./components/HeaderMenu";
 
 import logo from "../../../assets/logo.png";
 import sale from '../../../assets/sale.png';
@@ -18,7 +17,6 @@ const Home = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderMenu />
       <Image style={styles.logo} resizeMode="contain" source={logo} />
       <View pointerEvents={loading ? 'none' : 'auto'} style={styles.grid}>
         <CardButton
@@ -26,10 +24,6 @@ const Home = ({ navigation }) => {
           icon={cart}
           onPress={() =>
             navigation.navigate("Venda")}
-        />
-        <CardButton
-          title="Consulta venda"
-          icon={sale}
         />
         <CardButton
           title="Requisições"
