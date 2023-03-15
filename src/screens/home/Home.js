@@ -6,9 +6,10 @@ import logo from "../../../assets/logo.png";
 import sale from '../../../assets/sale.png';
 import user from '../../../assets/user.png';
 import cart from '../../../assets/cart.png';
-import price from '../../../assets/price.png'
-import truck from '../../../assets/truck.png'
-import box from '../../../assets/box.png'
+import price from '../../../assets/price.png';
+import truck from '../../../assets/truck.png';
+import box from '../../../assets/box.png';
+import expense from '../../../assets/expense.png';
 
 
 
@@ -20,10 +21,10 @@ const Home = ({ navigation }) => {
       <Image style={styles.logo} resizeMode="contain" source={logo} />
       <View pointerEvents={loading ? 'none' : 'auto'} style={styles.grid}>
         <CardButton
-          title="Venda"
+          title="Encomendas"
           icon={cart}
           onPress={() =>
-            navigation.navigate("Venda")}
+            navigation.navigate("Encomendas")}
         />
         <CardButton
           title="Requisições"
@@ -46,6 +47,18 @@ const Home = ({ navigation }) => {
         <CardButton
           title="Fornecedores"
           icon={truck}
+          onPress={() =>
+            navigation.navigate("Fornecedores")}
+        />
+        <CardButton
+          title="Funcionários"
+          icon={user}
+          onPress={() =>
+            navigation.navigate("Fornecedores")}
+        />
+        <CardButton
+          title="Despesas"
+          icon={expense}
           onPress={() =>
             navigation.navigate("Fornecedores")}
         />
