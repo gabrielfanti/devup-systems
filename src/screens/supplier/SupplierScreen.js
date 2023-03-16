@@ -16,7 +16,6 @@ export default function SupplierScreen() {
   async function mostraFornecedores() {
     const todosFornecedores = await buscaFornecedor();
     setFornecedores(todosFornecedores);
-    console.log(todosFornecedores);
   }
 
   function SupplierDetail({ item }) {

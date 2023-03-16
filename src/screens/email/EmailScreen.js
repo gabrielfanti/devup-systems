@@ -23,13 +23,11 @@ export default function EmailScreen() {
     async function mostraFornecedores() {
         const todosFornecedores = await buscaFornecedor();
         setFornecedores(todosFornecedores);
-        console.log(todosFornecedores);
     }
 
     async function mostraProdutos() {
         const todosProdutos = await buscaProduto();
         setProdutos(todosProdutos);
-        console.log(todosProdutos);
     }
 
     function SupplierDetail({ item }) {

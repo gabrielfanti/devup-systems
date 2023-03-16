@@ -35,29 +35,11 @@ export default function OrderEdit({ mostraEncomendas, encomendaSelecionada, setE
   async function mostraClientes() {
     const todosClientes = await buscaCliente();
     setClientes(todosClientes);
-    console.log(todosClientes);
-  }
-
-  function ClientDetail({ item }) {
-    return (
-      <TouchableOpacity style={estilos.cartao} onPress={() => setClienteSelecionado(item)}>
-        <Text style={estilos.texto}>Nome: {item.nome}</Text>
-      </TouchableOpacity>
-    );
   }
 
   async function mostraProdutos() {
     const todosProdutos = await buscaProduto();
     setProdutos(todosProdutos);
-    console.log(todosProdutos);
-  }
-
-  function ProductDetail({ item }) {
-    return (
-      <TouchableOpacity style={estilos.cartao} onPress={() => setProdutoSelecionado(item)}>
-        <Text style={estilos.texto}>Nome: {item.nome}</Text>
-      </TouchableOpacity>
-    );
   }
 
   async function salvaEncomenda() {

@@ -3,11 +3,11 @@ import { Image, View, Text, SafeAreaView, StyleSheet } from "react-native";
 import CardButton from "./components/CardButton";
 
 import logo from "../../../assets/logo.png";
-import sale from '../../../assets/sale.png';
 import user from '../../../assets/user.png';
 import cart from '../../../assets/cart.png';
-import price from '../../../assets/price.png';
+import mail from '../../../assets/mail.png';
 import truck from '../../../assets/truck.png';
+import badge from '../../../assets/badge.png';
 import box from '../../../assets/box.png';
 import expense from '../../../assets/expense.png';
 
@@ -28,7 +28,7 @@ const Home = ({ navigation }) => {
         />
         <CardButton
           title="Requisições"
-          icon={truck}
+          icon={mail}
           onPress={() =>
             navigation.navigate("Requisições")}
         />
@@ -52,7 +52,7 @@ const Home = ({ navigation }) => {
         />
         <CardButton
           title="Funcionários"
-          icon={user}
+          icon={badge}
           onPress={() =>
             navigation.navigate("Fornecedores")}
         />

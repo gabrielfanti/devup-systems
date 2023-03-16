@@ -16,15 +16,24 @@ export default function OrderScreen() {
   async function mostraEncomendas() {
     const todasEncomendas = await buscaEncomenda();
     setEncomendas(todasEncomendas);
-    console.log(todasEncomendas);
   }
 
   function getStatusColor(status) {
     if (status === "ATIVADO") {
-      return { backgroundColor: "green" };
+      return { backgroundColor: '#3cb043' };
     } else {
-      return { backgroundColor: "gray" };
+      return { backgroundColor: '#808080' };
     }
+  }
+
+  function compareEncomendas(a, b) {
+    if (a.status === "ATIVADO" && b.status !== "ATIVADO") {
+      return -1;
+    }
+    if (a.status !== "ATIVADO" && b.status === "ATIVADO") {
+      return 1;
+    }
+    return 0;
   }
 
   function OrderDetail({ item }) {
@@ -42,7 +51,7 @@ export default function OrderScreen() {
   return (
     <SafeAreaView style={estilos.container}>
       <FlatList
-        data={encomendas}
+        data={encomendas.sort(compareEncomendas)}
         renderItem={({ item }) => <OrderDetail item={item} />}
         keyExtractor={(item) => item.id}
       />

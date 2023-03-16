@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { criaTabela, buscaProduto } from "../../database/services/productAPI";
 import ProductEdit from "./ProductEdit";
 
@@ -12,11 +12,12 @@ export default function ProductScreen() {
 
   const [produtos, setProdutos] = useState([]);
   const [produtoSelecionado, setProdutoSelecionado] = useState({});
+  const [termoPesquisa, setTermoPesquisa] = useState('');
 
   async function mostraProdutos() {
     const todosProdutos = await buscaProduto();
+    todosProdutos.sort((a, b) => a.nome.localeCompare(b.nome));
     setProdutos(todosProdutos);
-    console.log(todosProdutos);
   }
 
   function ProductDetail({ item }) {
@@ -29,10 +30,22 @@ export default function ProductScreen() {
     );
   }
 
+  function filtrarProdutos() {
+    return produtos.filter(produto => produto.nome.toLowerCase().includes(termoPesquisa.toLowerCase()));
+  }
+
   return (
     <SafeAreaView style={estilos.container}>
+      <View style={estilos.barraPesquisa}>
+        <TextInput
+          style={estilos.caixaTexto}
+          onChangeText={setTermoPesquisa}
+          placeholder="Buscar produto"
+          value={termoPesquisa}
+        />
+      </View>
       <FlatList
-        data={produtos}
+        data={filtrarProdutos()}
         renderItem={({ item }) => <ProductDetail item={item} />}
         keyExtractor={(item) => item.id}
       />
@@ -47,6 +60,21 @@ const estilos = StyleSheet.create({
     flex: 1,
     alignItems: "stretch",
     justifyContent: "flex-start",
+  },
+  barraPesquisa: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderColor: '#5050ff',
+    borderWidth: 1,
+    borderRadius: 5,
+    margin: 10,
+    paddingHorizontal: 5,
+  },
+  caixaTexto: {
+    flex: 1,
+    fontSize: 18,
+    height: 40,
   },
   cartao: {
     borderColor: "#5050ff",
