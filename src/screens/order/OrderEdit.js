@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { adicionaEncomenda, atualizaEncomenda, removeEncomenda } from "../../database/services/orderAPI";
+import { Picker } from "@react-native-picker/picker";
+import { buscaCliente } from "../../database/services/clientAPI";
+import { buscaProduto } from "../../database/services/productAPI";
 
 export default function OrderEdit({ mostraEncomendas, encomendaSelecionada, setEncomendaSelecionada }) {
+
+  useEffect(() => {
+    mostraClientes();
+    mostraProdutos();
+  }, []);
+
   useEffect(() => {
     if (encomendaSelecionada.id) {
       preencheModal()
@@ -11,13 +20,45 @@ export default function OrderEdit({ mostraEncomendas, encomendaSelecionada, setE
       return
     }
     setEncomendaParaAtualizar(false)
-  }, [encomendaSelecionada])
+  }, [encomendaSelecionada]);
 
   const [cliente, setCliente] = useState("")
   const [produto, setProduto] = useState("")
   const [status, setStatus] = useState("")
   const [modalVisivel, setModalVisivel] = useState(false)
-  const [encomendaParaAtualizar, setEncomendaParaAtualizar] = useState(false)
+  const [encomendaParaAtualizar, setEncomendaParaAtualizar] = useState(false);
+  const [produtos, setProdutos] = useState([]);
+  const [produtoSelecionado, setProdutoSelecionado] = useState({});
+  const [clientes, setClientes] = useState([]);
+  const [clienteSelecionado, setClienteSelecionado] = useState({});
+
+  async function mostraClientes() {
+    const todosClientes = await buscaCliente();
+    setClientes(todosClientes);
+    console.log(todosClientes);
+  }
+
+  function ClientDetail({ item }) {
+    return (
+      <TouchableOpacity style={estilos.cartao} onPress={() => setClienteSelecionado(item)}>
+        <Text style={estilos.texto}>Nome: {item.nome}</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  async function mostraProdutos() {
+    const todosProdutos = await buscaProduto();
+    setProdutos(todosProdutos);
+    console.log(todosProdutos);
+  }
+
+  function ProductDetail({ item }) {
+    return (
+      <TouchableOpacity style={estilos.cartao} onPress={() => setProdutoSelecionado(item)}>
+        <Text style={estilos.texto}>Nome: {item.nome}</Text>
+      </TouchableOpacity>
+    );
+  }
 
   async function salvaEncomenda() {
     const novaEncomenda = {
@@ -73,29 +114,37 @@ export default function OrderEdit({ mostraEncomendas, encomendaSelecionada, setE
         <View style={estilos.centralizaModal}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={estilos.modal}>
-              <Text style={estilos.modalTitulo}>Cadastrar fornecedor</Text>
-              <Text style={estilos.modalSubTitulo}>Dados do fornecedor:</Text>
-              <TextInput
-                style={estilos.modalInput}
-                multiline={true}
-                numberOfLines={2}
-                onChangeText={novoCliente => setCliente(novoCliente)}
-                placeholder="Digite aqui o cliente:"
-                value={cliente} />
-              <TextInput
-                style={estilos.modalInput}
-                multiline={true}
-                numberOfLines={2}
-                onChangeText={novoProduto => setProduto(novoProduto)}
-                placeholder="Digite aqui o produto:"
-                value={produto} />
-              <TextInput
-                style={estilos.modalInput}
-                multiline={true}
-                numberOfLines={2}
-                onChangeText={novoStatus => setStatus(novoStatus)}
-                placeholder="Digite aqui o status:"
-                value={status} />
+              <Text style={estilos.modalTitulo}>Criar Encomenda</Text>
+              <Text style={estilos.modalSubTitulo}>Selecione os dados abaixo:</Text>
+              <Picker
+                selectedValue={cliente}
+                style={estilos.inputModal}
+                onValueChange={(itemValue) => setCliente(itemValue)}
+              >
+                <Picker.Item label="Selecione um cliente:" value="" />
+                {clientes.map((cliente) => (
+                  <Picker.Item label={cliente.nome} value={cliente.nome} key={cliente.id} />
+                ))}
+              </Picker>
+              <Picker
+                selectedValue={produto}
+                style={estilos.inputModal}
+                onValueChange={(itemValue) => setProduto(itemValue)}
+              >
+                <Picker.Item label="Selecione um produto:" value="" />
+                {produtos.map((produto) => (
+                  <Picker.Item label={produto.nome} value={produto.nome} key={produto.id} />
+                ))}
+              </Picker>
+              <Picker
+                selectedValue={status}
+                style={estilos.inputModal}
+                onValueChange={(itemValue) => setStatus(itemValue)}
+              >
+                <Picker.Item label="Defina o Status:" value="" />
+                <Picker.Item label="ATIVADO" value="ATIVADO" />
+                <Picker.Item label="DESATIVADO" value="DESATIVADO" />
+              </Picker>
               <View style={estilos.modalBotoes}>
                 <TouchableOpacity style={estilos.modalBotaoSalvar} onPress={() => {
                   encomendaParaAtualizar ? modificaEncomenda() : salvaEncomenda()

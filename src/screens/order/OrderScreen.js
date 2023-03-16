@@ -10,7 +10,7 @@ export default function OrderScreen() {
     mostraEncomendas();
   }, []);
 
-  const [fornecedores, setEncomendas] = useState([]);
+  const [encomendas, setEncomendas] = useState([]);
   const [encomendaSelecionada, setEncomendaSelecionada] = useState({});
 
   async function mostraEncomendas() {
@@ -19,9 +19,19 @@ export default function OrderScreen() {
     console.log(todasEncomendas);
   }
 
+  function getStatusColor(status) {
+    if (status === "ATIVADO") {
+      return { backgroundColor: "green" };
+    } else {
+      return { backgroundColor: "gray" };
+    }
+  }
+
   function OrderDetail({ item }) {
+    const cardStyle = getStatusColor(item.status);
+
     return (
-      <TouchableOpacity style={estilos.cartao} onPress={() => setEncomendaSelecionada(item)}>
+      <TouchableOpacity style={[estilos.cartao, cardStyle]} onPress={() => setEncomendaSelecionada(item)}>
         <Text style={estilos.texto}>Cliente: {item.cliente}</Text>
         <Text style={estilos.texto}>Produto: {item.produto}</Text>
         <Text style={estilos.texto}>Status: {item.status}</Text>
@@ -32,7 +42,7 @@ export default function OrderScreen() {
   return (
     <SafeAreaView style={estilos.container}>
       <FlatList
-        data={fornecedores}
+        data={encomendas}
         renderItem={({ item }) => <OrderDetail item={item} />}
         keyExtractor={(item) => item.id}
       />
@@ -49,14 +59,12 @@ const estilos = StyleSheet.create({
     justifyContent: "flex-start",
   },
   cartao: {
-    borderColor: "#5050ff",
     borderRadius: 4,
     backgroundColor: "#ffffff",
     paddingVertical: 6,
     paddingHorizontal: 16,
     marginHorizontal: 16,
     marginBottom: 8,
-    borderTopWidth: 5,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
