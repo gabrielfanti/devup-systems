@@ -20,7 +20,7 @@ export default function OrderScreen() {
 
   function getStatusColor(status) {
     if (status === "ATIVADO") {
-      return { backgroundColor: '#3cb043' };
+      return { backgroundColor: '#3CB35A' };
     } else {
       return { backgroundColor: '#808080' };
     }

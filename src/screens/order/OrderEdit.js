@@ -28,9 +28,7 @@ export default function OrderEdit({ mostraEncomendas, encomendaSelecionada, setE
   const [modalVisivel, setModalVisivel] = useState(false)
   const [encomendaParaAtualizar, setEncomendaParaAtualizar] = useState(false);
   const [produtos, setProdutos] = useState([]);
-  const [produtoSelecionado, setProdutoSelecionado] = useState({});
   const [clientes, setClientes] = useState([]);
-  const [clienteSelecionado, setClienteSelecionado] = useState({});
 
   async function mostraClientes() {
     const todosClientes = await buscaCliente();
