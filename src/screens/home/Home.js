@@ -60,7 +60,7 @@ const Home = ({ navigation }) => {
           title="Despesas"
           icon={expense}
           onPress={() =>
-            navigation.navigate("Fornecedores")}
+            navigation.navigate("Despesas")}
         />
       </View>
     </SafeAreaView>
