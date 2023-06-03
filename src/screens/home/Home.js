@@ -54,7 +54,7 @@ const Home = ({ navigation }) => {
           title="Funcionários"
           icon={badge}
           onPress={() =>
-            navigation.navigate("Fornecedores")}
+            navigation.navigate("Funcionários")}
         />
         <CardButton
           title="Despesas"

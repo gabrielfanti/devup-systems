@@ -12,6 +12,7 @@ import ProductScreen from './src/screens/product/ProductScreen';
 import SupplierScreen from './src/screens/supplier/SupplierScreen';
 import EmailScreen from './src/screens/email/EmailScreen';
 import ExpenseScreen from './src/screens/expense/ExpenseScreen';
+import EmployeeScreen from './src/screens/employee/EmployeeScreen';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ export default function App() {
         <Stack.Screen name="Clientes" component={ClientScreen} />
         <Stack.Screen name="Produtos" component={ProductScreen} />
         <Stack.Screen name="Fornecedores" component={SupplierScreen} />
+        <Stack.Screen name="Funcionários" component={EmployeeScreen} />
         <Stack.Screen name="Despesas" component={ExpenseScreen} />
       </Stack.Navigator>
     </NavigationContainer>
