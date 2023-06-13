@@ -5,29 +5,50 @@ import { adicionaCliente, atualizaCliente, removeCliente } from "../../database/
 export default function ClientEdit({ mostraClientes, clienteSelecionado, setClienteSelecionado }) {
   useEffect(() => {
     if (clienteSelecionado.id) {
-      preencheModal()
-      setClienteParaAtualizar(true)
-      setModalVisivel(true)
-      return
+      preencheModal();
+      setClienteParaAtualizar(true);
+      setModalVisivel(true);
+      return;
     }
-    setClienteParaAtualizar(false)
-  }, [clienteSelecionado])
+    setClienteParaAtualizar(false);
+  }, [clienteSelecionado]);
 
-  const [nome, setNome] = useState("")
-  const [cpf, setCpf] = useState("")
-  const [contato, setContato] = useState("")
-  const [modalVisivel, setModalVisivel] = useState(false)
-  const [clienteParaAtualizar, setClienteParaAtualizar] = useState(false)
+  const [nome, setNome] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [contato, setContato] = useState("");
+  const [modalVisivel, setModalVisivel] = useState(false);
+  const [clienteParaAtualizar, setClienteParaAtualizar] = useState(false);
+
+  function formatarCPF(cpf) {
+    const numerosCPF = cpf.replace(/\D/g, "");
+
+    const cpfFormatado = numerosCPF.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+
+    return cpfFormatado;
+  }
+
+  function formatarContato(contato) {
+    const numerosContato = contato.replace(/\D/g, "");
+    if (numerosContato.length === 11) {
+      const contatoFormatado = numerosContato.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+      return contatoFormatado;
+    } else if (numerosContato.length === 10) {
+      const contatoFormatado = numerosContato.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
+      return contatoFormatado;
+    }
+
+    return contato;
+  }
 
   async function salvaCliente() {
     const novoCliente = {
       nome: nome,
       cpf: cpf,
       contato: contato,
-    }
-    await adicionaCliente(novoCliente)
-    mostraClientes()
-    limpaModal()
+    };
+    await adicionaCliente(novoCliente);
+    mostraClientes();
+    limpaModal();
   }
 
   async function modificaCliente() {
@@ -35,31 +56,31 @@ export default function ClientEdit({ mostraClientes, clienteSelecionado, setClie
       nome: nome,
       cpf: cpf,
       contato: contato,
-      id: clienteSelecionado.id
-    }
-    await atualizaCliente(novoCliente)
-    mostraClientes()
-    limpaModal()
+      id: clienteSelecionado.id,
+    };
+    await atualizaCliente(novoCliente);
+    mostraClientes();
+    limpaModal();
   }
 
   async function deletaCliente() {
-    await removeCliente(clienteSelecionado)
-    mostraClientes()
-    limpaModal()
+    await removeCliente(clienteSelecionado);
+    mostraClientes();
+    limpaModal();
   }
 
   function preencheModal() {
-    setNome(clienteSelecionado.nome)
-    setCpf(clienteSelecionado.cpf)
-    setContato(clienteSelecionado.contato)
+    setNome(clienteSelecionado.nome);
+    setCpf(clienteSelecionado.cpf);
+    setContato(clienteSelecionado.contato);
   }
 
   function limpaModal() {
-    setNome("")
-    setCpf("")
-    setContato("")
-    setClienteSelecionado({})
-    setModalVisivel(false)
+    setNome("");
+    setCpf("");
+    setContato("");
+    setClienteSelecionado({});
+    setModalVisivel(false);
   }
 
   return (
@@ -68,7 +89,9 @@ export default function ClientEdit({ mostraClientes, clienteSelecionado, setClie
         animationType="slide"
         transparent={true}
         visible={modalVisivel}
-        onRequestClose={() => { setModalVisivel(false) }}
+        onRequestClose={() => {
+          setModalVisivel(false);
+        }}
       >
         <View style={estilos.centralizaModal}>
           <ScrollView showsVerticalScrollIndicator={false}>
@@ -79,34 +102,42 @@ export default function ClientEdit({ mostraClientes, clienteSelecionado, setClie
                 style={estilos.modalInput}
                 multiline={true}
                 numberOfLines={2}
-                onChangeText={novoNome => setNome(novoNome)}
+                onChangeText={(novoNome) => setNome(novoNome)}
                 placeholder="Digite aqui o nome:"
-                value={nome} />
+                value={nome}
+              />
               <TextInput
                 style={estilos.modalInput}
                 multiline={true}
                 numberOfLines={2}
-                onChangeText={novoCpf => setCpf(novoCpf)}
+                onChangeText={(novoCpf) => setCpf(formatarCPF(novoCpf))}
                 placeholder="Digite aqui o CPF:"
-                value={cpf} />
+                value={cpf}
+              />
               <TextInput
                 style={estilos.modalInput}
                 multiline={true}
                 numberOfLines={2}
-                onChangeText={novoContato => setContato(novoContato)}
+                onChangeText={(novoContato) => setContato(formatarContato(novoContato))}
                 placeholder="Digite aqui o contato:"
-                value={contato} />
+                value={contato}
+              />
               <View style={estilos.modalBotoes}>
-                <TouchableOpacity style={estilos.modalBotaoSalvar} onPress={() => {
-                  clienteParaAtualizar ? modificaCliente() : salvaCliente()
-                }}>
+                <TouchableOpacity
+                  style={estilos.modalBotaoSalvar}
+                  onPress={() => {
+                    clienteParaAtualizar ? modificaCliente() : salvaCliente();
+                  }}
+                >
                   <Text style={estilos.modalBotaoTexto}>Salvar</Text>
                 </TouchableOpacity>
-                {clienteParaAtualizar ?
+                {clienteParaAtualizar ? (
                   <TouchableOpacity style={estilos.modalBotaoDeletar} onPress={() => { deletaCliente() }}>
                     <Text style={estilos.modalBotaoTexto}>Deletar</Text>
-                  </TouchableOpacity> : <></>
-                }
+                  </TouchableOpacity>
+                ) : (
+                  <></>
+                )}
                 <TouchableOpacity style={estilos.modalBotaoCancelar} onPress={() => { limpaModal() }}>
                   <Text style={estilos.modalBotaoTexto}>Cancelar</Text>
                 </TouchableOpacity>
@@ -119,14 +150,14 @@ export default function ClientEdit({ mostraClientes, clienteSelecionado, setClie
         <Text style={estilos.addButtonText}>+</Text>
       </TouchableOpacity>
     </>
-  )
+  );
 }
 
 const estilos = StyleSheet.create({
   centralizaModal: {
     flex: 1,
     flexDirection: "row",
-    alignItems: "flex-end"
+    alignItems: "flex-end",
   },
   modal: {
     backgroundColor: "#ffffff",
@@ -154,7 +185,7 @@ const estilos = StyleSheet.create({
   modalSubTitulo: {
     fontSize: 18,
     marginBottom: 8,
-    fontWeight: "600"
+    fontWeight: "600",
   },
   modalInput: {
     fontSize: 16,
@@ -165,7 +196,7 @@ const estilos = StyleSheet.create({
   },
   modalBotoes: {
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   modalBotaoSalvar: {
     backgroundColor: "#5050ff",
@@ -215,5 +246,5 @@ const estilos = StyleSheet.create({
     fontSize: 32,
     lineHeight: 40,
     color: "#FFFFFF",
-  }
+  },
 });

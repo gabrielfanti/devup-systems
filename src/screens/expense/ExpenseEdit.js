@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { adicionaDespesa, atualizaDespesa, removeDespesa } from "../../database/services/expenseAPI";
+import CurrencyInput from "react-native-currency-input";
 
 export default function ExpenseEdit({ mostraDespesas, despesaSelecionada, setDespesaSelecionada }) {
   useEffect(() => {
@@ -22,18 +23,18 @@ export default function ExpenseEdit({ mostraDespesas, despesaSelecionada, setDes
   async function salvaDespesa() {
     const novaDespesa = {
       descricao: descricao,
-      valor: valor,
+      valor: parseFloat(valor).toFixed(2),
       vencimento: vencimento,
     }
     await adicionaDespesa(novaDespesa)
     mostraDespesas()
     limpaModal()
   }
-
+  
   async function modificaDespesa() {
     const novaDespesa = {
       descricao: descricao,
-      valor: valor,
+      valor: parseFloat(valor).toFixed(2),
       vencimento: vencimento,
       id: despesaSelecionada.id
     }
@@ -82,13 +83,17 @@ export default function ExpenseEdit({ mostraDespesas, despesaSelecionada, setDes
                 onChangeText={novaDescricao => setDescricao(novaDescricao)}
                 placeholder="Digite aqui o descricao:"
                 value={descricao} />
-              <TextInput
+              <CurrencyInput
                 style={estilos.modalInput}
-                multiline={true}
-                numberOfLines={2}
-                onChangeText={novoValor => setValor(novoValor)}
                 placeholder="Digite aqui o valor:"
-                value={valor} />
+                value={valor}
+                onChangeValue={setValor}
+                delimiter="."
+                separator=","
+                precision={2}
+                prefix="R$"
+                keyboardType="numeric"
+              />
               <TextInput
                 style={estilos.modalInput}
                 multiline={true}

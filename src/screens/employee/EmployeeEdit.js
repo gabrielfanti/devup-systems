@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { adicionaFuncionario, atualizaFuncionario, removeFuncionario } from "../../database/services/employeeAPI";
+import CurrencyInput from "react-native-currency-input";
 
 export default function EmployeeEdit({ mostraFuncionarios, funcionarioSelecionado, setFuncionarioSelecionado }) {
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function EmployeeEdit({ mostraFuncionarios, funcionarioSelecionad
   async function salvaFuncionario() {
     const novoFuncionario = {
       nome: nome,
-      salario: salario,
+      salario: parseFloat(salario).toFixed(2),
       vencimento: vencimento,
     }
     await adicionaFuncionario(novoFuncionario)
@@ -33,7 +34,7 @@ export default function EmployeeEdit({ mostraFuncionarios, funcionarioSelecionad
   async function modificaFuncionario() {
     const novoFuncionario = {
       nome: nome,
-      salario: salario,
+      salario: parseFloat(salario).toFixed(2),
       vencimento: vencimento,
       id: funcionarioSelecionado.id
     }
@@ -82,13 +83,17 @@ export default function EmployeeEdit({ mostraFuncionarios, funcionarioSelecionad
                 onChangeText={novoNome => setNome(novoNome)}
                 placeholder="Digite aqui o nome:"
                 value={nome} />
-              <TextInput
+              <CurrencyInput
                 style={estilos.modalInput}
-                multiline={true}
-                numberOfLines={2}
-                onChangeText={novoSalario => setSalario(novoSalario)}
                 placeholder="Digite aqui o salário:"
-                value={salario} />
+                value={salario}
+                onChangeValue={setSalario}
+                delimiter="."
+                separator=","
+                precision={2}
+                prefix="R$"
+                keyboardType="numeric"
+              />
               <TextInput
                 style={estilos.modalInput}
                 multiline={true}

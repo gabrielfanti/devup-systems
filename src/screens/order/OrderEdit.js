@@ -31,13 +31,15 @@ export default function OrderEdit({ mostraEncomendas, encomendaSelecionada, setE
   const [clientes, setClientes] = useState([]);
 
   async function mostraClientes() {
-    const todosClientes = await buscaCliente();
-    setClientes(todosClientes);
+    const todosClientes = await buscaCliente()
+    todosClientes.sort((a, b) => a.nome.localeCompare(b.nome))
+    setClientes(todosClientes)
   }
 
   async function mostraProdutos() {
     const todosProdutos = await buscaProduto();
-    setProdutos(todosProdutos);
+    todosProdutos.sort((a, b) => a.nome.localeCompare(b.nome))
+    setProdutos(todosProdutos)
   }
 
   async function salvaEncomenda() {

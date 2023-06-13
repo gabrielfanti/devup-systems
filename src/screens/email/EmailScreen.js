@@ -27,8 +27,10 @@ export default function EmailScreen() {
 
     async function mostraProdutos() {
         const todosProdutos = await buscaProduto();
-        setProdutos(todosProdutos);
+        const produtosOrdenados = todosProdutos.sort((a, b) => a.nome.localeCompare(b.nome));
+        setProdutos(produtosOrdenados);
     }
+    
 
     function SupplierDetail({ item }) {
         return (

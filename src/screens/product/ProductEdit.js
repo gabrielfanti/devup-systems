@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { adicionaProduto, atualizaProduto, removeProduto } from "../../database/services/productAPI";
+import CurrencyInput from "react-native-currency-input";
 
 export default function ProductEdit({ mostraProdutos, produtoSelecionado, setProdutoSelecionado }) {
   useEffect(() => {
@@ -23,7 +24,7 @@ export default function ProductEdit({ mostraProdutos, produtoSelecionado, setPro
     const novoProduto = {
       nome: nome,
       marca: marca,
-      valor: valor,
+      valor: parseFloat(valor).toFixed(2),
     }
     await adicionaProduto(novoProduto)
     mostraProdutos()
@@ -34,7 +35,7 @@ export default function ProductEdit({ mostraProdutos, produtoSelecionado, setPro
     const novoProduto = {
       nome: nome,
       marca: marca,
-      valor: valor,
+      valor: parseFloat(valor).toFixed(2),
       id: produtoSelecionado.id
     }
     await atualizaProduto(novoProduto)
@@ -60,6 +61,15 @@ export default function ProductEdit({ mostraProdutos, produtoSelecionado, setPro
     setValor("")
     setProdutoSelecionado({})
     setModalVisivel(false)
+  }
+
+  function formatarValor(valor) {
+    const formatter = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+    return formatter.format(valor);
   }
 
   return (
@@ -89,13 +99,17 @@ export default function ProductEdit({ mostraProdutos, produtoSelecionado, setPro
                 onChangeText={novaMarca => setMarca(novaMarca)}
                 placeholder="Digite aqui a marca:"
                 value={marca} />
-              <TextInput
+              <CurrencyInput
                 style={estilos.modalInput}
-                multiline={true}
-                numberOfLines={2}
-                onChangeText={novoValor => setValor(novoValor)}
+                value={valor}
+                onChangeValue={setValor}
                 placeholder="Digite aqui o valor:"
-                value={valor} />
+                prefix="R$ "
+                delimiter="."
+                separator=","
+                precision={2}
+                keyboardType="numeric"
+              />
               <View style={estilos.modalBotoes}>
                 <TouchableOpacity style={estilos.modalBotaoSalvar} onPress={() => {
                   produtoParaAtualizar ? modificaProduto() : salvaProduto()
