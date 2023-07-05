@@ -75,13 +75,13 @@ export default function ExpenseEdit({ mostraDespesas, despesaSelecionada, setDes
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={estilos.modal}>
               <Text style={estilos.modalTitulo}>Cadastrar despesa</Text>
-              <Text style={estilos.modalSubTitulo}>Dados do despesa:</Text>
+              <Text style={estilos.modalSubTitulo}>Dados da despesa:</Text>
               <TextInput
                 style={estilos.modalInput}
                 multiline={true}
                 numberOfLines={2}
                 onChangeText={novaDescricao => setDescricao(novaDescricao)}
-                placeholder="Digite aqui o descricao:"
+                placeholder="Digite aqui a descrição:"
                 value={descricao} />
               <CurrencyInput
                 style={estilos.modalInput}

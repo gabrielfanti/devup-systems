@@ -23,7 +23,7 @@ export default function SupplierScreen() {
       <TouchableOpacity style={estilos.cartao} onPress={() => setFornecedorSelecionado(item)}>
         <Text style={estilos.texto}>Nome: {item.nome}</Text>
         <Text style={estilos.texto}>CNPJ: {item.cnpj}</Text>
-        <Text style={estilos.texto}>Contato: {item.contato}</Text>
+        <Text style={estilos.texto}>E-mail: {item.contato}</Text>
       </TouchableOpacity>
     );
   }

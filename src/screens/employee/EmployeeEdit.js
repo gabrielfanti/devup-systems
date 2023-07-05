@@ -14,6 +14,19 @@ export default function EmployeeEdit({ mostraFuncionarios, funcionarioSelecionad
     setFuncionarioParaAtualizar(false)
   }, [funcionarioSelecionado])
 
+  function formatarContato(vencimento) {
+    const numerosContato = vencimento.replace(/\D/g, "");
+    if (numerosContato.length === 11) {
+      const contatoFormatado = numerosContato.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+      return contatoFormatado;
+    } else if (numerosContato.length === 10) {
+      const contatoFormatado = numerosContato.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
+      return contatoFormatado;
+    }
+
+    return vencimento;
+  }
+
   const [nome, setNome] = useState("")
   const [salario, setSalario] = useState("")
   const [vencimento, setVencimento] = useState("")
@@ -98,8 +111,8 @@ export default function EmployeeEdit({ mostraFuncionarios, funcionarioSelecionad
                 style={estilos.modalInput}
                 multiline={true}
                 numberOfLines={2}
-                onChangeText={novoVencimento => setVencimento(novoVencimento)}
-                placeholder="Digite aqui o vencimento:"
+                onChangeText={(novoVencimento) => setVencimento(formatarContato(novoVencimento))}
+                placeholder="Digite aqui o contato:"
                 value={vencimento} />
               <View style={estilos.modalBotoes}>
                 <TouchableOpacity style={estilos.modalBotaoSalvar} onPress={() => {

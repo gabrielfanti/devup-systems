@@ -23,7 +23,7 @@ export default function EmployeeScreen() {
       <TouchableOpacity style={estilos.cartao} onPress={() => setFuncionarioSelecionado(item)}>
         <Text style={estilos.texto}>Nome: {item.nome}</Text>
         <Text style={estilos.texto}>Salário: {item.salario}</Text>
-        <Text style={estilos.texto}>Vencimento: {item.vencimento}</Text>
+        <Text style={estilos.texto}>Contato: {item.vencimento}</Text>
       </TouchableOpacity>
     );
   }

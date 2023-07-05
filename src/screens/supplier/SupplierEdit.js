@@ -105,7 +105,7 @@ export default function SupplierEdit({ mostraFornecedores, fornecedorSelecionado
                 multiline={true}
                 numberOfLines={2}
                 onChangeText={novoContato => setContato(novoContato)}
-                placeholder="Digite aqui o contato:"
+                placeholder="Digite aqui o e-mail:"
                 value={contato} />
               <View style={estilos.modalBotoes}>
                 <TouchableOpacity style={estilos.modalBotaoSalvar} onPress={() => {
